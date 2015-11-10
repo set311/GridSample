@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,10 +21,13 @@ import java.util.List;
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     List<FeedItem> mItems;
     Context mContext;
+    IMainActivity delegate;
+
 
     public GridAdapter(Context context, List<FeedItem> feedItemList) {
         this.mItems = feedItemList;
         this.mContext =  context;
+        this.delegate = (IMainActivity)context;
     }
 
     @Override
@@ -43,6 +47,23 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 .error(android.R.drawable.ic_btn_speak_now)
                 .placeholder(android.R.drawable.ic_btn_speak_now)
                 .into(viewHolder.imgThumbnail);
+
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewHolder holder = (ViewHolder) view.getTag();
+                int position = holder.getAdapterPosition();
+
+                FeedItem feedItem = mItems.get(position);
+                delegate.cmdCellSelected(feedItem);
+            }
+        };
+
+        viewHolder.title.setOnClickListener(clickListener);
+        viewHolder.imgThumbnail.setOnClickListener(clickListener);
+
+        viewHolder.title.setTag(viewHolder);
+        viewHolder.imgThumbnail.setTag(viewHolder);
     }
 
     @Override

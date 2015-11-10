@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  IMainActivity {
 
     private static final String TAG = "GridSample";
     private List<FeedItem> feedsList;
@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     private ProgressBar progressBar;
+
+
+    public void cmdCellSelected(FeedItem item){
+        Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (result == 1) {
                 mAdapter = new GridAdapter( MainActivity.this , feedsList);
+
                 mRecyclerView.setAdapter(mAdapter);
             } else {
                 Toast.makeText(MainActivity.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
