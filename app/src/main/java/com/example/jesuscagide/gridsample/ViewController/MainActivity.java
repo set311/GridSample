@@ -1,4 +1,4 @@
-package com.example.jesuscagide.gridsample;
+package com.example.jesuscagide.gridsample.ViewController;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.jesuscagide.gridsample.Model.FeedItem;
+import com.example.jesuscagide.gridsample.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements  IMainActivity {
+public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     private static final String TAG = "GridSample";
     private List<FeedItem> feedsList;

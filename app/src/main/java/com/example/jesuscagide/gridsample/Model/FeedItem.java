@@ -1,4 +1,4 @@
-package com.example.jesuscagide.gridsample;
+package com.example.jesuscagide.gridsample.Model;
 
 /**
  * Created by jesuscagide on 11/10/15.

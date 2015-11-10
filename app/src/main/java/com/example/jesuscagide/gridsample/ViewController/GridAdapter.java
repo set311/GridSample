@@ -1,4 +1,4 @@
-package com.example.jesuscagide.gridsample;
+package com.example.jesuscagide.gridsample.ViewController;
 
 /**
  * Created by jesuscagide on 11/10/15.
@@ -11,14 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.jesuscagide.gridsample.Model.FeedItem;
+import com.example.jesuscagide.gridsample.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
+public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>  implements View.OnClickListener {
     List<FeedItem> mItems;
     Context mContext;
     IMainActivity delegate;
@@ -35,6 +35,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.grid_item, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
+        v.setOnClickListener(this);
         return viewHolder;
     }
 
@@ -48,27 +49,22 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 .placeholder(android.R.drawable.ic_btn_speak_now)
                 .into(viewHolder.imgThumbnail);
 
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ViewHolder holder = (ViewHolder) view.getTag();
-                int position = holder.getAdapterPosition();
+        viewHolder.itemView.setTag(viewHolder);
 
-                FeedItem feedItem = mItems.get(position);
-                delegate.cmdCellSelected(feedItem);
-            }
-        };
-
-        viewHolder.title.setOnClickListener(clickListener);
-        viewHolder.imgThumbnail.setOnClickListener(clickListener);
-
-        viewHolder.title.setTag(viewHolder);
-        viewHolder.imgThumbnail.setTag(viewHolder);
     }
 
     @Override
     public int getItemCount() {
         return (null != mItems ? mItems.size() : 0);
+    }
+
+    @Override
+    public void onClick(View view) {
+        ViewHolder holder = (ViewHolder) view.getTag();
+        int position = holder.getAdapterPosition();
+
+        FeedItem feedItem = mItems.get(position);
+        delegate.cmdCellSelected(feedItem);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
