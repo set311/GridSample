@@ -1,6 +1,8 @@
 package com.example.jesuscagide.gridsample.ViewController;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     public void cmdCellSelected(FeedItem item){
         Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, SecondActivity.class);
+        intent.putExtra("item", item);
+
+        startActivity(intent);
     }
 
     @Override
