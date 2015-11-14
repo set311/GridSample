@@ -9,6 +9,8 @@ import com.example.jesuscagide.gridsample.Model.FeedItem;
 import com.example.jesuscagide.gridsample.R;
 import com.squareup.picasso.Picasso;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * Created by jesuscagide on 11/10/15.
  */
@@ -22,9 +24,7 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
-        Bundle data = getIntent().getExtras();
-        FeedItem item = (FeedItem) data.getParcelable("item");
-
+        FeedItem item = (FeedItem) EventBus.getDefault().removeStickyEvent(FeedItem.class);
         imageView =  (ImageView)findViewById(R.id.imageView);
         text =   (TextView)findViewById(R.id.textView);
 

@@ -26,9 +26,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+import retrofit.*;
+
 public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     private static final String TAG = "GridSample";
+    private static final String API_URL = "http://javatechig.com";
     private List<FeedItem> feedsList;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -40,8 +44,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra("item", item);
-
+        EventBus.getDefault().postSticky(item);
         startActivity(intent);
     }
 
